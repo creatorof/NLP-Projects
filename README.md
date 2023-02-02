@@ -14,3 +14,10 @@ https://aclanthology.org/W19-4445.pdf
 |Methodology| Two different types of features are used in automatic detection of plagiarized spoken responses:: Content Similarity and Difference in Speaking Proficiency   for memorized and non-plagarized speech.|
 || Two content similarity metrics are used: n-gram overlap and Word Mover's Distance. Using n-gram overlap, a total of 116 n-gram overlap features is generated for each spoken response. As for differenitating speaking proficiency, an automated spoken English assessment system, SpeechRater is used to provide the automatic proficiency scores along with 29 features measuring fluency, pronunciation, prosody, rhythm, vocabulary, and grammar. The difference between score/feature values between two independent responses was calculated as a feature, which was used differentiate between canned and spontaneous response.|
 |Result| The F1 score was found to be highest for n-gram with 0.761 over WMD with 0.649. In real world scenario, running the model built using random forest and Adaboost with decision tree as the weak classifier, and then combined in an ensemble manner to flag potentially plagiarized responses out of 13,516, 850 responses were flagged and 35 of the confirmed plagarized were also successfully included. Only 4 plagarised responses were missed. |
+
+
+## 2. A Fast and Accurate Dependency Parser using Neural Networks
+https://aclanthology.org/D14-1082.pdf
+### Danqi Chen, Christopher D. Manning
+|  Topic  | A Fast and Accurate Dependency Parser using Neural Networks |
+|Summary||
