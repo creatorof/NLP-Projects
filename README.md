@@ -21,4 +21,4 @@ https://aclanthology.org/D14-1082.pdf
 ### Danqi Chen, Christopher D. Manning
 |  Topic  | A Fast and Accurate Dependency Parser using Neural Networks |
 |---|---|
-|Summary||
+|Summary|Traditional parsers relied on manual designed set of feature template that required a lot of expertise and are usually incomplete. They also suffered from poorly estimated feature weights. Lastly, they comsumed a lot of time in feature extraction and not in the core parsing algorithm. To combat this use of dense feature representations instead of sparse indicator features(Example: word2vec was introduced).|
