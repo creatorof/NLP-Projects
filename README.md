@@ -20,4 +20,5 @@ https://aclanthology.org/W19-4445.pdf
 https://aclanthology.org/D14-1082.pdf
 ### Danqi Chen, Christopher D. Manning
 |  Topic  | A Fast and Accurate Dependency Parser using Neural Networks |
+|---|---|
 |Summary||
