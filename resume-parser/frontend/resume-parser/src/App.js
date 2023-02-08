@@ -7,7 +7,8 @@ function App() {
   const [dragActive, setDragActive] = React.useState(false);
   // ref
   const inputRef = React.useRef(null);
-  const [formData, setFormData] = useState([]);
+  const [showDownloadButton, setShowDownloadButton] = React.useState(false);
+  const [resumes, setResumes] = useState([]);
   // handle drag events
   const handleDrag = function (e) {
     e.preventDefault();
@@ -27,7 +28,7 @@ function App() {
     if (e.dataTransfer.files && e.dataTransfer.files.length >= 1) {
       console.log(e.dataTransfer.files);
       // handleFiles(e.dataTransfer.files);
-      setFormData((formData) => [...formData, ...e.dataTransfer.files]);
+      setResumes((resumes) => [...resumes, ...e.dataTransfer.files]);
     }
   };
 
@@ -37,7 +38,7 @@ function App() {
     console.log(e.target.files);
     debugger;
     if (e.target.files && e.target.files.length >= 1) {
-      setFormData((formData) => [...formData, ...e.target.files]);
+      setResumes((resumes) => [...resumes, ...e.target.files]);
     }
   };
 
@@ -47,10 +48,16 @@ function App() {
   };
 
   const onSubmit = (e) => {
-    debugger;
     e.preventDefault();
-    console.log(formData);
-    // const formData = new FormData();
+    const formData = new FormData();
+    const totalResumes = resumes.length;
+    for (let i = 0; i < totalResumes; i++) {
+      if (resumes[i]) {
+        formData.append('file', resumes[i]);
+      }
+    }
+
+    setShowDownloadButton(true);
     // formData.append('file', e.target.file[0]);
     // const res = await fetch('http://localhost:5000/upload-file', {
     //   method: 'POST',
@@ -61,13 +68,12 @@ function App() {
 
   return (
     <div className="page">
-      <form id="form-file-upload" onDragEnter={handleDrag} onSubmit={onSubmit}>
+      <form id="form-file-upload" onDragEnter={handleDrag}>
         <input
           ref={inputRef}
           type="file"
           id="input-file-upload"
           accept=".pdf,.doc,.docx"
-          multiple={true}
           onChange={handleChange}
         />
         <label
@@ -91,10 +97,16 @@ function App() {
             onDrop={handleDrop}
           ></div>
         )}
-        <button type="submit" id="submit-resume">
-          {' '}
-          Submit
-        </button>
+
+        {showDownloadButton ? (
+          <button type="button" id="download-resume">
+            Download
+          </button>
+        ) : (
+          <button type="button" id="submit-resume" onClick={onSubmit}>
+            Submit
+          </button>
+        )}
       </form>
     </div>
   );
