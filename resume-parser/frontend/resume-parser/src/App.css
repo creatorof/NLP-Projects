@@ -3,7 +3,21 @@ body {
   font-family: 'Oswald', sans-serif;
   background-color: #cbd5cd;
 }
+::-webkit-scrollbar {
+  width: 10px;
+}
 
+::-webkit-scrollbar-track {
+  background-color: #ebebeb;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  background: #6d6d6d;
+}
 .page {
   display: flex;
   min-height: 100vh;
@@ -66,7 +80,7 @@ body {
 
 #submit-resume,
 #download-resume {
-  background-color: #f8fafc;
+  /*background-color: #f8fafc;*/
   padding: 10px;
   margin-top: 10px;
   margin-left: 10px;
@@ -76,4 +90,55 @@ body {
   text-align: center;
   text-transform: uppercase;
   color: black;
+}
+
+.parse-resume-div {
+  display: grid;
+}
+
+.parse-resume-div img {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.h6-text {
+  font-size: 1rem;
+  margin: 1em;
+}
+
+.text {
+  margin: 0;
+  text-align: center;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto;
+}
+.grid-item {
+  max-height: 55vh;
+  overflow-y: scroll;
+  width: 40vw;
+  margin-top: 10px;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #a2705a;
+}
+ol {
+  margin: 0px;
+  padding: 0px;
+  background-color: #5aa269;
+  list-style: none;
+}
+
+ol li {
+  padding-top: 10px;
+  border: 1px solid #8ebc97;
+  padding-bottom: 10px;
+}
+
+.back-btn {
+  margin-top: 10px;
+  margin-left: 10px;
 }

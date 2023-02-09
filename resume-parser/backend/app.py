@@ -1,20 +1,22 @@
 from flask import Flask, jsonify, request
+from utils import resume_parser
+from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
+cors = CORS(app)
 
-incomes = [
-    { 'description': 'salary', 'amount': 5000 }
-]
-
-@app.route('/incomes')
-def get_incomes():
-    return jsonify(incomes)
+@app.route('/skills')
+def get_skills():
+    return jsonify(['c','python','jira'])
 
 
 
 @app.route('/upload_resume', methods=['POST'])
 def upload_resume():
     files = request.files.get("file")
-    print(files)
-    return jsonify("Success"), 204
+    result = resume_parser(files)
+    return jsonify(result), 201
+
+
+
 

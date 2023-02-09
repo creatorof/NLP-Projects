@@ -1,14 +1,22 @@
 import './App.css';
 import React from 'react';
 import { useState } from 'react';
+import paperLogo from './paper-icon.png';
+import axios from 'axios';
 
 function App() {
   // drag state
-  const [dragActive, setDragActive] = React.useState(false);
+  const [dragActive, setDragActive] = useState(false);
+  const [uploaded, setUploaded] = useState(false);
   // ref
   const inputRef = React.useRef(null);
-  const [showDownloadButton, setShowDownloadButton] = React.useState(false);
+  //const [showDownloadButton, setShowDownloadButton] = useState(false);
   const [resumes, setResumes] = useState([]);
+  const [displayList, setDisplayList] = useState(false);
+  const [back, setBack] = useState(false);
+  const [education, setEducation] = useState([]);
+  const [skills, setSkills] = useState([]);
+
   // handle drag events
   const handleDrag = function (e) {
     e.preventDefault();
@@ -25,20 +33,20 @@ function App() {
     e.preventDefault();
     e.stopPropagation();
     setDragActive(false);
-    if (e.dataTransfer.files && e.dataTransfer.files.length >= 1) {
-      console.log(e.dataTransfer.files);
-      // handleFiles(e.dataTransfer.files);
-      setResumes((resumes) => [...resumes, ...e.dataTransfer.files]);
-    }
+    uploadResume(e.dataTransfer.files);
   };
 
   // triggers when file is selected with click
   const handleChange = function (e) {
     e.preventDefault();
-    console.log(e.target.files);
-    debugger;
-    if (e.target.files && e.target.files.length >= 1) {
-      setResumes((resumes) => [...resumes, ...e.target.files]);
+    uploadResume(e.target.files);
+  };
+
+  const uploadResume = function (resume) {
+    if (resume && resume.length >= 1) {
+      resume = resume[0];
+      setResumes(resume);
+      setUploaded(true);
     }
   };
 
@@ -50,65 +58,118 @@ function App() {
   const onSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData();
-    const totalResumes = resumes.length;
-    for (let i = 0; i < totalResumes; i++) {
-      if (resumes[i]) {
-        formData.append('file', resumes[i]);
-      }
-    }
+    formData.append('file', resumes);
 
-    setShowDownloadButton(true);
-    // formData.append('file', e.target.file[0]);
-    // const res = await fetch('http://localhost:5000/upload-file', {
-    //   method: 'POST',
-    //   body: formData,
-    // }).then((res) => res.json());
-    // alert(JSON.stringify(`${res.message}, status: ${res.status}`));
+    //setShowDownloadButton(true);
+    axios
+      .post('http://127.0.0.1:5000/upload_resume', formData, {
+        headers: {
+          'Content-Type': resumes.type,
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+        setDisplayList(true);
+        setEducation(res.data.education);
+        setSkills(res.data.skills);
+        // const skills = res.data.skills.filter(
+        //   (item, i, skills) => skills.indexOf(item) === i
+        // );
+        // setSkillsList(skills);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const goBack = () => {
+    setDisplayList(false);
+    setUploaded(false);
   };
 
   return (
-    <div className="page">
-      <form id="form-file-upload" onDragEnter={handleDrag}>
-        <input
-          ref={inputRef}
-          type="file"
-          id="input-file-upload"
-          accept=".pdf,.doc,.docx"
-          onChange={handleChange}
-        />
-        <label
-          id="label-file-upload"
-          htmlFor="input-file-upload"
-          className={dragActive ? 'drag-active' : ''}
-        >
+    <>
+      {displayList ? (
+        <>
           <div>
-            <p>Drag and drop your resume here or</p>
-            <button className="upload-button" onClick={onButtonClick}>
-              Upload a Resume
+            <button className="back-btn upload-button" onClick={goBack}>
+              {'<<'}Go Back
             </button>
           </div>
-        </label>
-        {dragActive && (
-          <div
-            id="drag-file-element"
+          <div className="grid-container list-div">
+            <div className="grid-item">
+              <h2>Education</h2>
+              <ol className="education-list">
+                {education &&
+                  education.map((ed) => (
+                    <li className={`${ed} list-item`}>{ed}</li>
+                  ))}
+              </ol>
+            </div>
+            <div className="grid-item">
+              <h2>Skills</h2>
+              <ol className="skill-list">
+                {skills &&
+                  skills.map((skill) => (
+                    <li className={`${skill} list-item`}>{skill}</li>
+                  ))}
+              </ol>
+            </div>
+          </div>
+        </>
+      ) : (
+        <div className="page">
+          <form
+            id="form-file-upload"
+            onSubmit={(e) => e.preventDefault()}
             onDragEnter={handleDrag}
-            onDragLeave={handleDrag}
-            onDragOver={handleDrag}
-            onDrop={handleDrop}
-          ></div>
-        )}
-
-        {showDownloadButton ? (
-          <button type="button" id="download-resume">
-            Download
-          </button>
-        ) : (
-          <button type="button" id="submit-resume" onClick={onSubmit}>
-            Submit
-          </button>
-        )}
-      </form>
-    </div>
+          >
+            <input
+              ref={inputRef}
+              type="file"
+              id="input-file-upload"
+              accept=".pdf"
+              onChange={handleChange}
+            />
+            <label
+              id="label-file-upload"
+              htmlFor="input-file-upload"
+              className={dragActive ? 'drag-active' : ''}
+            >
+              {uploaded ? (
+                <div className="parse-resume-div">
+                  <img src={paperLogo} height={100} width={100}></img>
+                  <p className="text">{resumes.name}</p>
+                  <button type="button" id="submit-resume" onClick={onSubmit}>
+                    Parse resume
+                  </button>
+                  <h6 className="h6-text">OR</h6>
+                  <button className="upload-button" onClick={onButtonClick}>
+                    Choose a different one
+                  </button>
+                </div>
+              ) : (
+                <div>
+                  <p>Drag and drop your resume here or</p>
+                  <button className="upload-button" onClick={onButtonClick}>
+                    Upload a Resume
+                  </button>
+                </div>
+              )}
+            </label>
+            {dragActive && (
+              <div
+                id="drag-file-element"
+                onDragEnter={handleDrag}
+                onDragLeave={handleDrag}
+                onDragOver={handleDrag}
+                onDrop={handleDrop}
+              ></div>
+            )}
+          </form>
+        </div>
+      )}
+    </>
   );
 }
 
