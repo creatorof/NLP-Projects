@@ -34,4 +34,6 @@ pip install -r requirements.txt
 # To do in Future
 1) Extract more information from education field like university, started year and graduated year
 2) Add more fields like emails, work history and so on.
-3) Many more.
+3) Add download as csv, xlsx or json feature
+4) Add multiple file parsing feature and support docx and image extensions
+5) Many more.
