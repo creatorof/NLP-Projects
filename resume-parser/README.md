@@ -1,3 +1,6 @@
+# Resume Parser using Spacy
+Resume parser made using spacy, flask and react js to extract skills and education
+
 # TO RUN THE APPLICATION FOR FIRST TIME
 ## Installation in Frontend Folder
 
@@ -26,3 +29,9 @@ pip install -r requirements.txt
 
 # Education and Skills extracted
 <img src ='figure/result.jpg'>
+
+
+# To do in Future
+1) Extract more information from education field like university, started year and graduated year
+2) Add more fields like emails, work history and so on.
+3) Many more.
