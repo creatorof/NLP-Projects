@@ -31,6 +31,10 @@ https://aclanthology.org/2021.acl-short.64.pdf
 | Aims  | To approach the Aspect-Based Sentiment Analaysis as a generative problem |
 | Previous Work | Liu et al., 2015; Yin et al., 2016; Li et al., 2018; Ma et al., 2019 deals with extracting aspect terms|
 |                 |Wang et al., 2016; Chen et al., 2017; Jiang et al.,2019; Zhang and Qian, 2020 for classifying the sentiment polarity for a given aspect|
-|                 |Li et al., 2019a; Wan et al., 2020; Peng et al.,2020; Zhao et al., 2020 and Luo et al., 2019; He et al., 2019 have purposed to predict multiple elemetns simultaneously. |
-|Methodology| |
-|Result| |
+|                 |Li et al., 2019a; Wan et al., 2020; Peng et al.,2020; Zhao et al., 2020 and Luo et al., 2019; He et al., 2019 have purposed to predict multiple elements simultaneously. |
+|Methodology| Two different technique was introduced: annotation-style and extractionstyle modeling to transform the original task as a generation problem |
+|           | Annotation style adds annotations on a given sentence to include the label information when constructing the target sentence whereas Extraction style adopts the desired label as the target.|
+|           |4 tasks have been investigated to evaluate the effectiveness of the problem: 1) aspect-opinion extraction, 2) extracting aspect terms and predicting their sentiment polarities at the same time, 3) extracting aspect, opinion and sentiment polarity 4) extracting aspect term, aspect category and sentiment polarity|
+|           | Use  pre-trained T5 model to generate a target sentences based on either annotation style or extraction style for a given input|
+|           | When decoding, there might be some changes in structure of words such as plural to singular; to combat the issue of incorrect prediction, prediction normalization strategy is used|
+|Result| The proposed method based on either annotation-style or extraction-style modeling, establishes a new state-of-the-art results in almost all cases.|
