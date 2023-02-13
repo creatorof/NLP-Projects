@@ -22,3 +22,15 @@ https://aclanthology.org/D14-1082.pdf
 |  Topic  | A Fast and Accurate Dependency Parser using Neural Networks |
 |---|---|
 |Summary|Traditional parsers relied on manual designed set of feature template that required a lot of expertise and are usually incomplete. They also suffered from poorly estimated feature weights. Lastly, they comsumed a lot of time in feature extraction and not in the core parsing algorithm. To combat this use of dense feature representations instead of sparse indicator features(Example: word2vec was introduced).|
+
+## 3. Towards Generative Aspect-Based Sentiment Analysis
+https://aclanthology.org/2021.acl-short.64.pdf
+### Wenxuan Zhang, Xin Li, Yang Deng , Lidong Bing and Wai Lam
+|  Topic  | Towards Generative Aspect-Based Sentiment Analysis |
+| --- | --- |
+| Aims  | To approach the Aspect-Based Sentiment Analaysis as a generative problem |
+| Previous Work | Liu et al., 2015; Yin et al., 2016; Li et al., 2018; Ma et al., 2019 deals with extracting aspect terms|
+|                 |Wang et al., 2016; Chen et al., 2017; Jiang et al.,2019; Zhang and Qian, 2020 for classifying the sentiment polarity for a given aspect|
+|                 |Li et al., 2019a; Wan et al., 2020; Peng et al.,2020; Zhao et al., 2020 and Luo et al., 2019; He et al., 2019 have purposed to predict multiple elemetns simultaneously. |
+|Methodology| |
+|Result| |
