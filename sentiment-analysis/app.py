@@ -69,6 +69,7 @@ def get_common_words(corpus):
     print('Vocab Size :',voc_size)
     word_freq = Counter(vocabs)
     common_words = word_freq.most_common(5)
+    common_words = [word[0] for word in common_words]
     return common_words
 
 def get_top_words(dataset):
