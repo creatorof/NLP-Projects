@@ -21,3 +21,7 @@ pip install -r requirements.txt
 # Code Editor
 <img src ='figure/main.jpg'>
 
+
+# After prediction code Editor
+<img src ='figure/after prediction.jpg'>
+
