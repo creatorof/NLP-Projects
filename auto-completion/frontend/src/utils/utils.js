@@ -1,3 +1,1 @@
-const predict = (sentence) => {
-  return sentence;
-};
+const predict = (sentence) => {};

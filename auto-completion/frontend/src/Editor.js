@@ -1,14 +1,28 @@
 import React, { useState } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import predict from './utils/utils';
 
 function CodeEditor() {
   const [value, setValue] = useState('');
 
   const onChangeText = (e) => {
-    const predictedWord = predict(e);
-    setValue(predictedWord);
+    const sentence = {
+      sentence: e.target.value,
+    };
+    axios
+      .post('http://127.0.0.1:5000/autocomplete', sentence, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .then((res) => {
+        const predictedWord = res.data.predicted;
+        const sentence = value + predictedWord;
+        setValue(sentence);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
   return (
     <ReactQuill
