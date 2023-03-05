@@ -1,5 +1,5 @@
-# Resume Parser using Spacy
-Autocompletion made using spacy, flask and react js to extract skills and education
+# Autocompletion using spacy, flask and react js
+Autocompletion made using spacy, flask and react js to auto complete the code editor for python
 
 # TO RUN THE APPLICATION FOR FIRST TIME
 ## Installation in Frontend Folder
