@@ -2,9 +2,15 @@ import torch
 import pickle
 from model import Encoder, Decoder, Seq2SeqPackedAttention, Attention
 from torchtext.data.utils import get_tokenizer
-from transformers import AutoTokenizer
 import torch.nn as nn
+from inltk.inltk import setup 
+from inltk.inltk import tokenize
+import pickle
 
+try:
+    setup('ne') 
+except:
+    print("Error")
 
 variants = 'additive'
 saved_path = 'Seq2SeqPackedAttention_additive.pt'
@@ -13,12 +19,12 @@ SEED = 1234
 torch.manual_seed(SEED)
 torch.backends.cudnn.deterministic = True
 
-tokenizer = AutoTokenizer.from_pretrained('Sakonii/deberta-base-nepali')
+tokenizer = tokenize
 
 SRC_LANGUAGE,TRG_LANGUAGE = 'ne', 'en'
 
 token_transform = {}
-token_transform[SRC_LANGUAGE] = tokenizer.tokenize
+token_transform[SRC_LANGUAGE] = tokenize
 token_transform[TRG_LANGUAGE] = get_tokenizer('spacy', language='en_core_web_sm')
 
 # Define special symbols and indices
@@ -26,10 +32,7 @@ UNK_IDX, PAD_IDX, SOS_IDX, EOS_IDX = 0, 1, 2, 3
 # Make sure the tokens are in order of their indices to properly insert them in vocab
 special_symbols = ['<unk>', '<pad>', '<sos>', '<eos>']
 
-# Load data (vocab and transform)
-import pickle
-
-with open('vocab_transform.pickle', 'rb') as handle:
+with open('model.pickle', 'rb') as handle:
     vocab_transform = pickle.load(handle)
 print(vocab_transform)
 
@@ -39,7 +42,7 @@ def sequential_transforms(*transforms):
     def func(txt_input):
         for transform in transforms:
             if transform == token_transform[SRC_LANGUAGE]:
-                txt_input = transform.tokenize(txt_input)
+                txt_input = tokenize(txt_input)
             else:
                 txt_input = transform(txt_input)
         return txt_input

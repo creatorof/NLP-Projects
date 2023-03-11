@@ -1,5 +1,5 @@
 import { useState } from 'react';
-
+import axios from 'axios';
 import './App.css';
 
 function App() {
@@ -7,14 +7,33 @@ function App() {
   const [translatedText, setTranslatedText] = useState('');
 
   const translate = (text) => {
-    //axios.post()
-    setTranslatedText(text);
+    axios
+      .post(
+        'http://127.0.0.1:5000/translate',
+        {
+          source: text,
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      )
+      .then((res) => {
+        // console.log(res.data);
+        const result = res.data;
+        setOriginalText(result.source);
+        setTranslatedText(result.translated_text);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const onKeyUp = (text) => {
     setOriginalText(text);
     translate(text);
-    console.log(text);
+    // console.log(text);
   };
 
   return (

@@ -9,10 +9,11 @@ app = Flask(__name__)
 cors = CORS(app)
 
 
-@app.route('/translate', 'POST')
+@app.route('/translate', methods=['POST'])
 def translate_to_en():
-    source = request.json['sentence']
+    source = request.json['source']
+    print(source)
     translatedText = translate(source)
-   
-    result = {"source":source, "predict":translatedText}
+    translated_text = "I am not alright"
+    result = {"source":source, "translated_text":translated_text}
     return jsonify(result), 201
