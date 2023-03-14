@@ -61,6 +61,6 @@ https://arxiv.org/pdf/1711.00279.pdf
 |		    | Paraphrase generation formulated as Seq2Seq2 problem (Cao et al., 2017; Prakash et al., 2016; Gupta et al., 2018; Su and Yan 2017)|
 |		    | Use of lexical-based evaluation measure as reward function (Ranzato et al.,2016; Papineni et al., 2002; Lin,2004)|
 |		    | Main problem in paraphrase generation was in defining the evaluation measure of the paraphrase. |
-|Methodology    | |
-|Result| |
+|Methodology    | New framework that contains two module: generator and evaluator. The generator is a Seq2Seq learning model with attention and copy mechanism(Bahdanau et al., 2015; See et al., 2017) Evaluator is a deep matching model (Parikh et al.,2016), which can be trained by supervised learning or by inverse reinforcement learning.|
+|Result	    | Proposed method significantly imporoved the paraphrase quality|
 
