@@ -49,3 +49,18 @@ https://arxiv.org/pdf/1706.03762.pdf
 | Previous Work | Extended Neural GPU, ByteNet, ConvS2S relied on CNN to reduce the sequential computation. But number of steps needed to compute in order to relate input to output increases with distance between their position.  |
 |Methodology| Model architecture solely relies on attention mechanism to find out relationship between input and output. Attention is used in two ways: scaled dot-product and multi-headed attention which internally uses scaled dot product attention|
 |Result| For translation tasks, the Transformer outperformed model architectures that were based on recurrent or convolutional layers.|
+
+
+## 5. Paraphrase Generation with Deep Reinforcement Learning
+https://arxiv.org/pdf/1711.00279.pdf
+### Zichao Li, Xin Jiang, Lifeng Shangm Hang Li
+|  Topic  | Paraphrase Generation with Deep Reinforcement Learning |
+| --- | --- |
+| Aims  | A deep reinforcement approach to paraphrase generation |
+| Previous Work | Symbolic approaches to paraphrase generation: rule-based (McKeown,1983), thesaurus-based methods (Bolshakov and Gelbukh, 2004; Kauchak and Barzilay, 2006), grammar-based methods (Narayan et al., 2016) grammar-based methods(Narayan t al., 2016), and statistical machine translation based methods (Quirk et al., 2004; Zhao et al., 2008,2009) |
+|		    | Paraphrase generation formulated as Seq2Seq2 problem (Cao et al., 2017; Prakash et al., 2016; Gupta et al., 2018; Su and Yan 2017)|
+|		    | Use of lexical-based evaluation measure as reward function (Ranzato et al.,2016; Papineni et al., 2002; Lin,2004)|
+|		    | Main problem in paraphrase generation was in defining the evaluation measure of the paraphrase. |
+|Methodology    | |
+|Result| |
+
