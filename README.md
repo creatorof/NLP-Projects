@@ -1,5 +1,5 @@
 # NLP-Assignments
-Natural Language Pre-processing Reading Assignments
+Natural Language Pre-processing Reading
 
 
 ## Reading Assignments
